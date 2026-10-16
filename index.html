@@ -1,69 +1,246 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Matt Stearn's Page</title>
-<meta name="description" content="Consulting tools by Matt Stearn: the Culture and Quality Toolkit and the Consultant Console.">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Culture and Quality Toolkit</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#f5f3ee;--panel:#fffdf9;--fg:#1c2421;--mute:#69726d;--line:#e2ded3;--accent:#1d5a4a;--accent-fg:#fff;--soft:#e3efe9;--inf:#4a4f86;--infbg:#e8e9f6}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Inter,system-ui,sans-serif;padding-inline:16px;padding-block:48px}
-.wrap{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
-.eyebrow{font:600 12px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:0 0 12px}
-h1{font:600 clamp(32px,6vw,48px)/1.1 Fraunces,Georgia,serif;margin:0;text-wrap:balance}
-.lede{color:var(--mute);max-width:56ch;margin:14px 0 0}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
-.tool{display:flex;flex-direction:column;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;min-width:0}
-.tag{align-self:flex-start;font:600 11px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:6px 10px;background:var(--soft);color:var(--accent)}
-.tool.adv .tag{background:var(--infbg);color:var(--inf)}
-h2{font:600 24px/1.2 Fraunces,Georgia,serif;margin:0}
-.tool p{margin:0;color:var(--mute)}
-.tool ul{margin:0;padding-left:18px;color:var(--mute);display:flex;flex-direction:column;gap:4px;font-size:14.5px}
-.btn{margin-top:auto;align-self:flex-start;display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font:600 14px/1 Inter,sans-serif;padding:13px 20px;border-radius:9px}
-.btn:hover{opacity:.9}
-.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.foot{color:var(--mute);font-size:13px}
-</style>
-</head>
-<body>
+:root{--bg:#f5f3ee;--panel:#fffdf9;--fg:#1c2421;--mute:#69726d;--line:#e2ded3;--accent:#1d5a4a;--accent-fg:#fff;--soft:#e3efe9;--warn:#80560f;--warnbg:#f5e9d0;--err:#a63a2b;--errbg:#f8e4e0;--inf:#4a4f86;--infbg:#e8e9f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--warn:#e3b765;--warnbg:#3a2f18;--err:#f0958a;--errbg:#3d2420;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--warn:#e3b765;--warnbg:#3a2f18;--err:#f0958a;--errbg:#3d2420;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 Inter,system-ui,sans-serif;padding-inline:16px;padding-block:24px}
+.wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1{font:600 30px/1.15 Fraunces,Georgia,serif;margin:0;text-wrap:balance}
+h2{font:600 11.5px/1 Inter,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin:0 0 12px}
+h3{font:600 17px/1.25 Fraunces,Georgia,serif;margin:0 0 6px}
+p{margin:0}.sub{color:var(--mute)}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;padding:3px;background:var(--panel)}
+.seg button{background:transparent;color:var(--mute);border:0;border-radius:99px;padding:6px 14px;font:500 13px Inter,sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.steps{display:flex;gap:8px;flex-wrap:wrap}
+.step{flex:1 1 140px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:10px 12px;cursor:pointer;color:var(--mute);font:500 13px Inter,sans-serif;text-align:left;min-width:0}
+.step b{display:block;color:var(--fg);font-weight:600}
+.step[aria-current="step"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+textarea,input,select{width:100%;box-sizing:border-box;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:inherit}
+textarea{min-height:76px;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+label{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--mute)}
+label b{color:var(--fg);font-weight:600;font-size:14px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+button.pri{background:var(--accent);color:var(--accent-fg);border:0;border-radius:8px;padding:10px 18px;font:600 14px Inter,sans-serif;cursor:pointer}
+button.pri:disabled{opacity:.5;cursor:default}
+button.ghost{background:transparent;color:var(--mute);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:500 13px Inter,sans-serif;cursor:pointer}
+.tbl{display:grid;grid-template-columns:minmax(0,3fr) 110px repeat(3,64px) 56px 76px;gap:6px;align-items:center;overflow-x:auto}
+.tbl .hd{font-size:11px;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+.tbl input,.tbl select{padding:7px 8px}
+.tbl>*{min-width:0}
+.tblw{overflow-x:auto}.tblw .tbl{min-width:640px}
+.prio{font-weight:600;text-align:center;font-variant-numeric:tabular-nums}
+.top1{background:var(--soft);color:var(--accent);border-radius:6px;padding:3px 0}
+.pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.opt{border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;background:var(--bg);text-align:left;color:var(--fg);font:inherit}
+.opt[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--soft)}
+.opt b{display:block;margin-bottom:3px}.opt span{color:var(--mute);font-size:13px}
+.item{display:flex;flex-direction:column;gap:3px;padding:11px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:0}
+.cite{font-size:12px;color:var(--accent);font-weight:600;margin-left:6px;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:99px;padding:2px 8px;background:var(--infbg);color:var(--inf);margin-right:6px}
+.notice{padding:12px 14px;border-radius:8px;background:var(--warnbg);color:var(--warn)}
+.error{padding:12px 14px;border-radius:8px;background:var(--errbg);color:var(--err)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.col{border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
+.col.on{border-color:var(--accent);background:var(--soft)}
+ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.src{display:grid;grid-template-columns:30px 1fr auto;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.src:first-of-type{border-top:0}.src>span:first-child{color:var(--accent);font-weight:600}
+.src small{color:var(--mute)}
+.pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;animation:p 1s infinite alternate}
+@keyframes p{to{opacity:.2}}
+.advisor{border-left:3px solid var(--inf);background:var(--infbg);border-radius:0 10px 10px 0;padding:14px 16px}
+.advisor h2{color:var(--inf)}
+@media (max-width:560px){.top{align-items:flex-start}}
+</style></head><body>
 <div class="wrap">
-  <header>
-    <p class="eyebrow">Consulting tools</p>
-    <h1>Matt Stearn's Page</h1>
-    <p class="lede">Two tools that work from the same library: one shows how culture shows up in quality, the other turns a situation into a grounded first read.</p>
+  <header class="top">
+    <div>
+      <p class="sub" style="font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px">Prepared for <input id="client" placeholder="Client name" style="display:inline;width:180px;padding:2px 6px;font-size:12px;border-style:dashed"></p>
+      <h1>Culture and Quality Toolkit</h1>
+      <p class="sub" style="margin-top:6px;max-width:60ch">Work one leadership issue through a structured issue-processing method and see how culture shows up in quality.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Mode"><button id="m_adv" aria-pressed="true">Advisor-led</button><button id="m_cli" aria-pressed="false">Client pre-work</button></div>
   </header>
 
-  <main class="tools">
-    <section class="tool">
-      <span class="tag">Client access code</span>
-      <h2>Culture and Quality Toolkit</h2>
-      <p>Work one leadership issue through a structured method and see where culture is shaping quality.</p>
-      <ul>
-        <li>Pick the issue that matters most</li>
-        <li>Check people fit and ownership</li>
-        <li>Get next steps and what to measure</li>
-      </ul>
-      <a class="btn" href="/toolkit/">Open the toolkit</a>
-    </section>
-
-    <section class="tool adv">
-      <span class="tag">Consultant access</span>
-      <h2>Consultant Console</h2>
-      <p>Describe a situation in plain words and get a read, likely causes and first moves, grounded in the library.</p>
-      <ul>
-        <li>Quick diagnosis from a short description</li>
-        <li>Likely causes and first moves</li>
-        <li>Questions to ask in the room</li>
-      </ul>
-      <a class="btn" href="/console/">Open the console</a>
-    </section>
-  </main>
-
-  <p class="foot">Both tools ask for an access code before running.</p>
+  <nav class="steps" id="steps"></nav>
+  <main id="view" class="stack"></main>
 </div>
-</body>
-</html>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lit=s=>"'"+String(s).replace(/\0/g,'').replace(/'/g,"''")+"'";
+const KEY='cq-toolkit-v1';
+const blank=()=>({mode:'advisor',step:0,client:'',company:'',industry:'',role:'',
+  issues:[{t:'Challenge',txt:'',u:3,i:3,f:3,p:null},{t:'Opportunity',txt:'',u:3,i:3,f:3,p:null},{t:'Initiative',txt:'',u:3,i:3,f:3,p:null}],
+  how:'',important:'',done:'',want:'',focus:'',stage:'',result:null,
+  seats:[{who:'',get:'',want:'',cap:''},{who:'',get:'',want:'',cap:''}],qowner:'',sowner:'',single:''});
+let S=blank();
+try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);S=Object.assign(blank(),o,{result:null});if(!Array.isArray(S.seats))S.seats=blank().seats}}catch(_){}
+const save=()=>{try{const c={...S};delete c.result;localStorage.setItem(KEY,JSON.stringify(c))}catch(_){}};
+let busy=false,err='',status='';let CODE='';try{CODE=localStorage.getItem('cq-code')||''}catch(_){}
+
+const STEPS=[['1','Pre-work'],['2','Issue statement'],['3','Focus and stage'],['4','Results']];
+const FOCUS=[['Mindset','Think strategically beyond your expertise, understand the facts and weigh options.'],['Communication','Build understanding, support and motivation with stakeholders.'],['Collaboration','Seek perspectives and win buy-in and participation.']];
+const STAGE=[['Define','Set the scope and outcome, who is involved, and what success looks like.'],['Plan','Build the roadmap: milestones, owners, cadence and KPIs.'],['Execute','Implement, adjust, hold people accountable and deliver results.']];
+const prio=x=>x.p||Math.round((+x.u+ +x.i+ +x.f)/3);
+
+function nav(){
+  $('steps').innerHTML=STEPS.map((s,i)=>`<button class="step" data-i="${i}" ${i===S.step?'aria-current="step"':''}><b>${s[0]}. ${s[1]}</b></button>`).join('');
+  $('m_adv').setAttribute('aria-pressed',S.mode==='advisor');$('m_cli').setAttribute('aria-pressed',S.mode==='client');
+}
+$('steps').onclick=e=>{const b=e.target.closest('.step');if(b){S.step=+b.dataset.i;draw()}};
+$('m_adv').onclick=()=>{S.mode='advisor';save();draw()};
+$('m_cli').onclick=()=>{S.mode='client';save();draw()};
+$('client').value=S.client;$('client').oninput=e=>{S.client=e.target.value;save()};
+
+function gate(){
+  return `<section class="card stack" style="max-width:420px"><h2>Access</h2><p class="sub">Enter your access code to use the toolkit.</p>${err?`<div class="error">${esc(err)}</div>`:''}<label><b>Access code</b><input id="code" type="password" autocomplete="off"></label><div class="row"><button class="pri" id="entercode">Continue</button></div></section>`;
+}
+function draw(){
+  if(!CODE){$('steps').innerHTML='';const g=$('view');g.innerHTML=gate();const go=()=>{const c=$('code').value.trim();if(!c)return;CODE=c;err='';try{localStorage.setItem('cq-code',c)}catch(_){}draw()};$('entercode').onclick=go;$('code').onkeydown=e=>{if(e.key==='Enter')go()};return}
+  nav();const v=$('view');
+  if(S.step===0)v.innerHTML=step0();
+  else if(S.step===1)v.innerHTML=step1();
+  else if(S.step===2)v.innerHTML=step2();
+  else v.innerHTML=step3();
+  bind();
+}
+const num=(k,i,v)=>`<input type="number" min="1" max="5" value="${v}" data-k="${k}" data-i="${i}" aria-label="${k}">`;
+function step0(){
+  const top=Math.max(...S.issues.map(prio));
+  const rows=S.issues.map((x,i)=>`
+    <input data-k="txt" data-i="${i}" value="${esc(x.txt)}" placeholder="Describe the initiative, challenge or opportunity" aria-label="Issue">
+    <select data-k="t" data-i="${i}" aria-label="Type">${['Initiative','Challenge','Opportunity'].map(t=>`<option ${t===x.t?'selected':''}>${t}</option>`).join('')}</select>
+    ${num('u',i,x.u)}${num('i',i,x.i)}${num('f',i,x.f)}
+    <div class="prio ${x.txt&&prio(x)===top?'top1':''}">${prio(x)}</div>
+    <button class="ghost" data-use="${i}" ${x.txt?'':'disabled'}>Process</button>`).join('');
+  return `<section class="card"><h2>Step 1 · Choose the issue to bring</h2>
+    <p class="sub" style="margin-bottom:12px">List what's on your plate and rate each 1 to 5. Think of quality-related items: a new supplier process, a recurring defect, an audit finding, low adoption of a procedure. Priority is the average of the three scores; the highest is the one to process.</p>
+    <div class="tblw"><div class="tbl"><div class="hd">Issue</div><div class="hd">Type</div><div class="hd">Urgency</div><div class="hd">Impact</div><div class="hd">Feedback</div><div class="hd">Priority</div><div></div>${rows}</div></div>
+    <div class="row" style="margin-top:14px"><button class="ghost" id="addissue">Add a row</button><span class="sub">Impact = company impact. Feedback = how much you need others' input.</span></div></section>
+    <div class="row"><button class="pri" id="next">Next: write the issue statement</button></div>`;
+}
+function step1(){
+  return `<section class="card stack"><h2>Step 2 · Issue statement</h2>
+    <div class="grid">
+      <label>Company<input data-f="company" value="${esc(S.company)}" placeholder="Optional"></label>
+      <label>Industry<input data-f="industry" value="${esc(S.industry)}" placeholder="e.g. food manufacturing"></label>
+      <label>Your role<input data-f="role" value="${esc(S.role)}" placeholder="Optional"></label>
+    </div>
+    <label><b>How do I …?</b>Turn the issue into an actionable question.<textarea data-f="how" placeholder="e.g. get production staff to report near-miss quality problems early?">${esc(S.how)}</textarea></label>
+    <label><b>This is important because …</b>Effect on customers, cost, people, deadlines, compliance.<textarea data-f="important">${esc(S.important)}</textarea></label>
+    <label><b>What I have done to date is …</b><textarea data-f="done">${esc(S.done)}</textarea></label>
+    <label><b>What I want help with is …</b><textarea data-f="want">${esc(S.want)}</textarea></label></section>
+    <div class="row"><button class="ghost" id="back">Back</button><button class="pri" id="next">Next: focus and stage</button></div>`;
+}
+function step2(){
+  const opt=(arr,key)=>arr.map(([n,d])=>`<button class="opt" data-pick="${key}" data-v="${n}" aria-pressed="${S[key]===n}"><b>${n}</b><span>${d}</span></button>`).join('');
+  return `<section class="card stack"><h2>Step 3 · Where to focus</h2>
+    <div><h3>Leadership focus</h3><div class="pick">${opt(FOCUS,'focus')}</div></div>
+    <div><h3>Stage of the issue</h3><div class="pick">${opt(STAGE,'stage')}</div></div></section>
+    <section class="card stack"><h2>People and ownership (optional)</h2>
+    <p class="sub">Is the problem about the seat rather than the process? For each person close to the issue, answer: do they understand the role, want it, and have the capacity for it?</p>
+    <div class="tblw"><div class="tbl" style="grid-template-columns:minmax(150px,2fr) repeat(3,minmax(90px,1fr))"><div class="hd">Person or role</div><div class="hd">Understands it</div><div class="hd">Wants it</div><div class="hd">Has capacity</div>${S.seats.map((x,i)=>`<input data-s="who" data-i="${i}" value="${esc(x.who)}" placeholder="e.g. Line supervisor" aria-label="Person or role">${['get','want','cap'].map(k=>`<select data-s="${k}" data-i="${i}" aria-label="${k}"><option value="">Not sure</option>${['yes','maybe','no'].map(o=>`<option ${x[k]===o?'selected':''}>${o}</option>`).join('')}</select>`).join('')}`).join('')}</div></div>
+    <div class="row" style="margin-top:0"><button class="ghost" id="addseat" ${S.seats.length>=4?'disabled':''}>Add a person</button></div>
+    <div class="grid">
+      <label>Who owns the quality outcome?<input data-f="qowner" value="${esc(S.qowner)}" placeholder="One name or role"></label>
+      <label>Who owns the step where it goes wrong?<input data-f="sowner" value="${esc(S.sowner)}" placeholder="One name or role"></label>
+      <label>Is there exactly one owner?<select data-f="single"><option value="">Not sure</option>${['yes','maybe','no'].map(o=>`<option ${S.single===o?'selected':''}>${o}</option>`).join('')}</select></label>
+    </div></section>
+    <div class="row"><button class="ghost" id="back">Back</button><button class="pri" id="run" ${S.how.trim()?'':'disabled'}>Run the analysis</button>${S.how.trim()?'':'<span class="sub">Add the issue statement in step 2 first.</span>'}</div>`;
+}
+const cites=a=>'';
+const list=a=>(a&&a.length)?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'';
+function step3(){
+  if(busy)return `<section class="card"><p><span class="pulse"></span>${esc(status||'Working…')}</p><p class="sub" style="margin-top:6px">This usually takes under a minute.</p></section>`;
+  let h='';
+  if(err)h+=`<div class="error">${esc(err)}</div>`;
+  const r=S.result;
+  if(!r)return h+`<section class="card"><p class="sub">No analysis yet. Complete steps 1 to 3, then run it.</p></section><div class="row"><button class="ghost" id="back">Back</button><button class="pri" id="run" ${S.how.trim()?'':'disabled'}>Run the analysis</button></div>`;
+  const a=r.analysis||{};const adv=S.mode==='advisor';
+  h+=`<section class="card"><h2>Issue restatement</h2><h3 style="font-size:20px">${esc(a.issue_restatement)}</h3><p class="sub" style="margin-top:6px"><span class="tag">${esc(S.focus||'No focus')}</span><span class="tag">${esc(S.stage||'No stage')}</span></p></section>`;
+  const q=a.culture_quality_link;
+  if(q)h+=`<section class="card"><h2>How culture shows up in quality</h2><p>${esc(q.summary)}</p><div style="margin-top:12px">${(q.mechanisms||[]).map(m=>`<div class="item"><span><span class="tag">Culture</span><b>${esc(m.culture_factor||m.factor)}</b>${cites(m.sources)}</span><span class="sub"><span class="tag" style="background:var(--soft);color:var(--accent)">Quality</span>${esc(m.quality_effect||m.effect_on_quality)}</span></div>`).join('')}</div></section>`;
+  const c=a.clarifying_questions;
+  if(c){const st=(S.stage||'').toLowerCase();h+=`<section class="card"><h2>Clarifying questions</h2><div class="cols">${[['define','Stage 1 · Define'],['plan','Stage 2 · Plan'],['execute','Stage 3 · Execute']].map(([k,t])=>`<div class="col ${st===k?'on':''}"><h3 style="font-size:15px">${t}</h3>${list(c[k])}</div>`).join('')}</div></section>`}
+  const pf=a.people_fit;
+  if(pf){const vc={'right seat':'var(--accent)','probe':'var(--warn)','wrong seat':'var(--err)'};const o=pf.ownership||{};
+    h+=`<section class="card"><h2>People and ownership</h2><p>${esc(pf.summary)}</p>
+    ${(pf.seats||[]).map(x=>`<div class="item"><span><b>${esc(x.who)}</b> <span class="tag" style="color:${vc[x.verdict]||'var(--mute)'}">${esc(x.verdict)}</span>${cites(x.sources)}</span><span class="sub">${esc(x.note)}</span></div>`).join('')}
+    ${(o.finding||o.gap||o.question)?`<div class="item"><b>Ownership${cites(o.sources)}</b><span class="sub">${esc(o.finding)}</span>${o.gap?`<span class="sub"><b>Gap:</b> ${esc(o.gap)}</span>`:''}${o.question?`<span class="sub"><b>Ask:</b> ${esc(o.question)}</span>`:''}</div>`:''}
+    ${pf.values_prompt?`<div class="item"><b>Link to values</b><span class="sub">${esc(pf.values_prompt)}</span></div>`:''}</section>`}
+  const sc=a.system_check;
+  if(sc)h+=`<section class="card"><h2>Check the quality system</h2><p>${esc(sc.summary)}</p>
+    ${(sc.evidence_to_request||[]).length?`<div class="item"><b>Ask for</b>${(sc.evidence_to_request).map(e=>`<span class="sub"><b>${esc(e.item)}</b>${cites(e.sources)} ${esc(e.why)}</span>`).join('')}</div>`:''}
+    ${(sc.warning_signs||[]).length?`<div class="item"><b>Warning signs to look for</b><ul>${sc.warning_signs.map(w=>`<li>${esc(w.sign)}${cites(w.sources)}</li>`).join('')}</ul></div>`:''}</section>`;
+  const f=a.feedback;
+  if(f)h+=`<section class="card"><h2>Constructive feedback</h2>
+    <div class="item"><b>Leadership focus</b><span class="sub">${esc(f.leadership_focus)}</span></div>
+    <div class="item"><b>Strategic thinking</b><span class="sub">${esc(f.strategic_thinking)}</span></div>
+    <div class="item"><b>Alternatives to consider</b>${list(f.alternatives)}</div>
+    <div class="item"><b>Limiting beliefs</b>${list(f.limiting_beliefs)}</div>
+    <div class="item"><b>Perspective</b><span class="sub">${esc(f.perspective)}</span></div></section>`;
+  if((a.next_steps||[]).length)h+=`<section class="card"><h2>Next steps</h2>${a.next_steps.map((n,i)=>`<div class="item"><span><b>${i+1}. ${esc(n.step)}</b>${cites(n.sources)}</span><span class="sub">${esc(n.how)}</span></div>`).join('')}</section>`;
+  if((a.measures||[]).length)h+=`<section class="card"><h2>What to measure</h2>${a.measures.map(m=>`<div class="item"><span>${m.kind?`<span class="tag">${esc(m.kind)}</span>`:''}<b>${esc(m.measure)}</b></span><span class="sub">${esc(m.why)}</span></div>`).join('')}</section>`;
+  if(adv&&(a.discussion_prompts||[]).length)h+=`<section class="advisor"><h2>For the advisor: questions for the room</h2>${list(a.discussion_prompts)}</section>`;
+  if(a.gaps)h+=`<div class="notice"><b>Not covered by the library.</b> ${esc(a.gaps)} Items marked "Inference" are reasoning, not evidence.</div>`;
+  h+=`<div class="row"><button class="ghost" id="back">Edit inputs</button><button class="pri" id="run">Run again</button><button class="ghost" id="copy">Copy summary</button><span id="copied" class="sub"></span></div>`;
+  return h;
+}
+function bind(){
+  const v=$('view');
+  v.querySelectorAll('[data-f]').forEach(el=>el.oninput=el.onchange=()=>{S[el.dataset.f]=el.value;save();const r=$('run');if(r)r.disabled=!S.how.trim()});
+  v.querySelectorAll('[data-k]').forEach(el=>el.onchange=()=>{const x=S.issues[+el.dataset.i],k=el.dataset.k;x[k]=(k==='txt'||k==='t')?el.value:Math.min(5,Math.max(1,+el.value||1));save();if(k!=='txt')draw()});
+  v.querySelectorAll('[data-s]').forEach(el=>el.onchange=el.oninput=()=>{S.seats[+el.dataset.i][el.dataset.s]=el.value;save()});
+  v.querySelectorAll('[data-use]').forEach(b=>b.onclick=()=>{const x=S.issues[+b.dataset.use];S.how=S.how||x.txt.replace(/\?*$/,'?');S.step=1;save();draw()});
+  v.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{S[b.dataset.pick]=b.dataset.v;save();draw()});
+  const on=(id,fn)=>{const e=$(id);if(e)e.onclick=fn};
+  on('next',()=>{S.step++;draw()});on('back',()=>{S.step=Math.max(0,S.step-1);draw()});
+  on('addissue',()=>{S.issues.push({t:'Challenge',txt:'',u:3,i:3,f:3,p:null});draw()});
+  on('addseat',()=>{S.seats.push({who:'',get:'',want:'',cap:''});save();draw()});
+  on('run',run);on('copy',copy);
+}
+function norm(o){if(Array.isArray(o))return o.map(norm);if(o&&typeof o==='object'){const n={};for(const k in o)n[k.trim()]=norm(o[k]);return n}return o}
+async function run(){
+  if(busy||!S.how.trim())return;
+  busy=true;err='';S.step=3;status='Searching the library and applying the Issue Processing steps\u2026';draw();
+  const top=S.issues.find(x=>x.txt)||S.issues[0];
+  const payload={how:S.how,important:S.important,done:S.done,want:S.want,focus:S.focus,stage:S.stage,company:S.company,industry:S.industry,role:S.role,
+    scores:{urgency:top.u,impact:top.i,feedback:top.f},
+    seats:S.seats.filter(x=>x.who.trim()).map(x=>({who:x.who,get:x.get,want:x.want,capacity:x.cap})),
+    ownership:{quality_owner:S.qowner,step_owner:S.sowner,single:S.single}};
+  const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),115000);
+  try{
+    const r=await fetch('/api/run',{method:'POST',headers:{'content-type':'application/json','x-access-code':CODE},body:JSON.stringify(payload),signal:ctl.signal});
+    let o=null;try{o=await r.json()}catch(_){}
+    if(r.status===401){CODE='';try{localStorage.removeItem('cq-code')}catch(_){}throw{message:(o&&o.error)||'Access code not recognised.'}}
+    if(!r.ok)throw{message:(o&&o.error)||('The service returned an error ('+r.status+').')};
+    S.result=norm(o);
+  }catch(e){err=(e&&e.name==='AbortError')?'The analysis took too long. Try again.':((e&&e.message)||'Something unexpected happened.')}
+  clearTimeout(to);busy=false;draw();
+}
+function copy(){
+  const r=S.result,a=(r&&r.analysis)||{};const L=[];
+  L.push(`CULTURE AND QUALITY SUMMARY${S.client?' · '+S.client:''}`,'',`Issue: ${a.issue_restatement||S.how}`,`Focus: ${S.focus||'-'} · Stage: ${S.stage||'-'}`,'');
+  if(a.culture_quality_link){L.push('How culture shows up in quality:',a.culture_quality_link.summary);(a.culture_quality_link.mechanisms||[]).forEach(m=>L.push(`- ${m.culture_factor||m.factor}: ${m.quality_effect||m.effect_on_quality}`));L.push('')}
+  if(a.people_fit){const pf=a.people_fit,o=pf.ownership||{};L.push('People and ownership:',pf.summary);(pf.seats||[]).forEach(x=>L.push(`- ${x.who} (${x.verdict}): ${x.note}`));if(o.finding)L.push('Ownership: '+o.finding);if(o.gap)L.push('Gap: '+o.gap);L.push('')}
+  if(a.system_check){const k=a.system_check;L.push('Quality system check:',k.summary);(k.evidence_to_request||[]).forEach(e=>L.push(`- Ask for ${e.item}: ${e.why}`));(k.warning_signs||[]).forEach(w=>L.push(`- Watch for: ${w.sign}`));L.push('')}
+  if((a.next_steps||[]).length){L.push('Next steps:');a.next_steps.forEach((n,i)=>L.push(`${i+1}. ${n.step}: ${n.how}`));L.push('')}
+  if(a.gaps)L.push('Not covered by the library: '+a.gaps);
+  const txt=L.join('\n');
+  const done=ok=>{const c=$('copied');if(c)c.textContent=ok?'Copied':'Select and copy manually'};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>done(true)).catch(()=>{prompt_fallback(txt);done(false)});else{prompt_fallback(txt);done(false)}
+}
+function prompt_fallback(txt){const ta=document.createElement('textarea');ta.value=txt;ta.style.minHeight='200px';const c=$('copied');if(c)c.after(ta);ta.select()}
+draw();
+</script>
+</body></html>
