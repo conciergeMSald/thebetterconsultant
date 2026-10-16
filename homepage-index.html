@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matt Stearn's Page</title>
+<meta name="description" content="Consulting tools by Matt Stearn: the Culture and Quality Toolkit and the Consultant Console.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f5f3ee;--panel:#fffdf9;--fg:#1c2421;--mute:#69726d;--line:#e2ded3;--accent:#1d5a4a;--accent-fg:#fff;--soft:#e3efe9;--inf:#4a4f86;--infbg:#e8e9f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Inter,system-ui,sans-serif;padding-inline:16px;padding-block:48px}
+.wrap{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.eyebrow{font:600 12px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:0 0 12px}
+h1{font:600 clamp(32px,6vw,48px)/1.1 Fraunces,Georgia,serif;margin:0;text-wrap:balance}
+.lede{color:var(--mute);max-width:56ch;margin:14px 0 0}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.tool{display:flex;flex-direction:column;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;min-width:0}
+.tag{align-self:flex-start;font:600 11px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:6px 10px;background:var(--soft);color:var(--accent)}
+.tool.adv .tag{background:var(--infbg);color:var(--inf)}
+h2{font:600 24px/1.2 Fraunces,Georgia,serif;margin:0}
+.tool p{margin:0;color:var(--mute)}
+.tool ul{margin:0;padding-left:18px;color:var(--mute);display:flex;flex-direction:column;gap:4px;font-size:14.5px}
+.btn{margin-top:auto;align-self:flex-start;display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font:600 14px/1 Inter,sans-serif;padding:13px 20px;border-radius:9px}
+.btn:hover{opacity:.9}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.foot{color:var(--mute);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Consulting tools</p>
+    <h1>Matt Stearn's Page</h1>
+    <p class="lede">Two tools that work from the same library: one shows how culture shows up in quality, the other turns a situation into a grounded first read.</p>
+  </header>
+
+  <main class="tools">
+    <section class="tool">
+      <span class="tag">Client access code</span>
+      <h2>Culture and Quality Toolkit</h2>
+      <p>Work one leadership issue through a structured method and see where culture is shaping quality.</p>
+      <ul>
+        <li>Pick the issue that matters most</li>
+        <li>Check people fit and ownership</li>
+        <li>Get next steps and what to measure</li>
+      </ul>
+      <a class="btn" href="/toolkit/">Open the toolkit</a>
+    </section>
+
+    <section class="tool adv">
+      <span class="tag">Consultant access</span>
+      <h2>Consultant Console</h2>
+      <p>Describe a situation in plain words and get a read, likely causes and first moves, grounded in the library.</p>
+      <ul>
+        <li>Quick diagnosis from a short description</li>
+        <li>Likely causes and first moves</li>
+        <li>Questions to ask in the room</li>
+      </ul>
+      <a class="btn" href="/console/">Open the console</a>
+    </section>
+  </main>
+
+  <p class="foot">Both tools ask for an access code before running.</p>
+</div>
+</body>
+</html>
