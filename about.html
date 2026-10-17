@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About Matt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee4;--panel:#fbf8f2;--fg:#1f2a22;--mute:#667064;--line:#ddd3c0;--accent:#2f4a38;--accent-fg:#fbf8f2;--glow:#d98f55;--gravel:#c8b59a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121815;--panel:#1a221d;--fg:#ece8dd;--mute:#a3ab9f;--line:#2e3a32;--accent:#a9c9ad;--accent-fg:#14201a;--glow:#e3a06b;--gravel:#5b5242;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121815;--panel:#1a221d;--fg:#ece8dd;--mute:#a3ab9f;--line:#2e3a32;--accent:#a9c9ad;--accent-fg:#14201a;--glow:#e3a06b;--gravel:#5b5242;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Jost,system-ui,sans-serif}
+.hero{position:relative;min-height:340px;display:flex;align-items:flex-end;color:#fbf8f2;background:#27392d url(hero.jpg) center 62%/cover no-repeat;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,22,17,.5),rgba(14,22,17,.65))}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;gap:8px;padding:18px 16px;max-width:1040px;margin:0 auto;flex-wrap:wrap}
+.top span{display:flex;gap:8px;flex-wrap:wrap}
+.top a{color:#fbf8f2;text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;border:1px solid rgba(251,248,242,.45);border-radius:2px;background:rgba(14,22,17,.25)}
+.hero-in{width:100%;max-width:760px;margin:0 auto;padding:110px 16px 44px}
+.eyebrow{margin:0 0 12px;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#f0d9bd}
+h1{margin:0;font:600 clamp(38px,6vw,60px)/1.05 "Cormorant Garamond",Georgia,serif;text-wrap:balance}
+main{max-width:760px;margin:0 auto;padding:44px 16px 72px}
+h2{margin:28px 0 8px;font:600 28px/1.15 "Cormorant Garamond",Georgia,serif}
+p{margin:0 0 14px}
+.mute{color:var(--mute)}
+.links{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:10px}
+.links a{display:block;padding:14px 18px;background:var(--panel);border:1px solid var(--line);border-radius:3px;color:var(--accent);text-decoration:none;font-weight:500}
+.links a:hover{border-color:var(--accent)}
+.note{padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--glow);border-radius:3px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:500;letter-spacing:.04em;padding:12px 22px;border-radius:2px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-in"><nav class="top"><a href="/">&larr; Home</a><span><a href="/about">About Matt</a><a href="/schedule">Schedule a call</a></span></nav>
+<p class="eyebrow">About</p><h1>Matt Stearn</h1></div></header>
+<main><p>[Matt's bio goes here. Two or three short paragraphs: who he is, the work he does with leaders and teams, and what people can expect from working with him.]</p>
+<p class="mute">[Optional: a line on background, credentials or where he is based.]</p>
+<h2>Find Matt online</h2>
+<ul class="links">
+<li><a href="#">LinkedIn</a></li>
+<li><a href="#">Substack</a></li>
+<li><a href="#">Instagram</a></li>
+<li><a href="https://abettercollegeconsultant.com" target="_blank" rel="noopener">A Better College Consultant</a></li>
+</ul></main>
+</body>
+</html>
