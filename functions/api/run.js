@@ -2,6 +2,7 @@
 // Checks an access code, applies an optional daily limit, then calls the worker with a key the browser never sees.
 // Settings (Pages > Settings > Variables and secrets):
 //   ACCESS_CODES  comma-separated codes, e.g. "acme-2026,beta-guest"   (secret)
+//                 add ":N" to cap a code at N runs in total, e.g. "acme-2026:10,beta-guest" (needs the RUNS KV binding)
 //   WORKER_KEY    the worker's x-api-key value                         (secret)
 //   WORKER_URL    https://xtkhzicrloqwgxdsfwvc.supabase.co/functions/v1/issue
 //   DAILY_LIMIT   optional, runs per code per day (default 20; needs the RUNS KV binding)
@@ -11,8 +12,15 @@ const json = (b, status = 200) =>
 
 export async function onRequestPost({ request, env }) {
   const code = (request.headers.get("x-access-code") || "").trim();
-  const codes = (env.ACCESS_CODES || "").split(",").map((s) => s.trim()).filter(Boolean);
-  if (!code || !codes.includes(code)) return json({ error: "Access code not recognised." }, 401);
+  const table = new Map();
+  for (const e of (env.ACCESS_CODES || "").split(",").map((s) => s.trim()).filter(Boolean)) {
+    const i = e.lastIndexOf(":");
+    const cap = i > 0 && /^\d+$/.test(e.slice(i + 1)) ? parseInt(e.slice(i + 1), 10) : null;
+    table.set(cap === null ? e : e.slice(0, i), cap);
+  }
+  if (!code || !table.has(code)) return json({ error: "Access code not recognised." }, 401);
+  const cap = table.get(code);
+  if (cap !== null && !env.RUNS) return json({ error: "Service is not configured." }, 503);
   if (!env.WORKER_KEY || !env.WORKER_URL) return json({ error: "Service is not configured." }, 503);
 
   const raw = await request.text();
@@ -30,6 +38,21 @@ export async function onRequestPost({ request, env }) {
     await env.RUNS.put(key, String(n + 1), { expirationTtl: 172800 });
   }
 
+  // total-run cap for this code (counted now, given back if the analysis fails)
+  const totalKey = `total:${code}`;
+  let counted = false;
+  if (cap !== null) {
+    const used = parseInt((await env.RUNS.get(totalKey)) || "0", 10);
+    if (used >= cap) return json({ error: "This access code has used all of its runs." }, 403);
+    await env.RUNS.put(totalKey, String(used + 1));
+    counted = true;
+  }
+  const refund = async () => {
+    if (!counted) return;
+    const u = parseInt((await env.RUNS.get(totalKey)) || "1", 10);
+    await env.RUNS.put(totalKey, String(Math.max(0, u - 1)));
+  };
+
   // forward only the fields the worker understands
   const pick = ["how", "important", "done", "want", "focus", "stage", "company", "industry", "role", "scores", "seats", "ownership"];
   const body = {};
@@ -43,11 +66,12 @@ export async function onRequestPost({ request, env }) {
       body: JSON.stringify(body),
     });
   } catch {
+    await refund();
     return json({ error: "The analysis service did not answer. Try again." }, 502);
   }
   let out;
-  try { out = await r.json(); } catch { return json({ error: "Unexpected reply from the analysis service." }, 502); }
-  if (!r.ok) return json({ error: "The analysis could not be completed. Try again." }, 502);
+  try { out = await r.json(); } catch { await refund(); return json({ error: "Unexpected reply from the analysis service." }, 502); }
+  if (!r.ok) { await refund(); return json({ error: "The analysis could not be completed. Try again." }, 502); }
   // return the analysis only; library source listings stay private
   return json({ analysis: out.analysis });
 }

@@ -61,6 +61,7 @@ ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px}
 .advisor h2{color:var(--inf)}
 @media (max-width:560px){.top{align-items:flex-start}}
 </style></head><body>
+<button id="signout" class="ghost" hidden style="position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:16px;z-index:5;padding:6px 12px;font-size:13px;background:var(--panel);color:var(--mute);border:1px solid var(--line);border-radius:8px;cursor:pointer">Sign out</button>
 <div class="wrap">
   <header class="top">
     <div>
@@ -105,7 +106,8 @@ $('client').value=S.client;$('client').oninput=e=>{S.client=e.target.value;save(
 function gate(){
   return `<section class="card stack" style="max-width:420px"><h2>Access</h2><p class="sub">Enter your access code to use the toolkit.</p>${err?`<div class="error">${esc(err)}</div>`:''}<label><b>Access code</b><input id="code" type="password" autocomplete="off"></label><div class="row"><button class="pri" id="entercode">Continue</button></div></section>`;
 }
-function draw(){
+function so(){const b=$("signout");b.hidden=!CODE;b.onclick=()=>{CODE="";try{localStorage.removeItem("cq-code")}catch(_){}draw()}}
+function draw(){so();
   if(!CODE){$('steps').innerHTML='';const g=$('view');g.innerHTML=gate();const go=()=>{const c=$('code').value.trim();if(!c)return;CODE=c;err='';try{localStorage.setItem('cq-code',c)}catch(_){}draw()};$('entercode').onclick=go;$('code').onkeydown=e=>{if(e.key==='Enter')go()};return}
   nav();const v=$('view');
   if(S.step===0)v.innerHTML=step0();

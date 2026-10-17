@@ -35,6 +35,7 @@ button:disabled{opacity:.5;cursor:default}
 @keyframes p{to{opacity:.2}}
 ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
 </style></head><body>
+<button id="signout" class="ghost" hidden style="position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:16px;z-index:5;padding:6px 12px;font-size:13px;background:var(--panel);color:var(--mute);border:1px solid var(--line);border-radius:8px;cursor:pointer">Sign out</button>
 <div class="wrap">
   <header><p class="sub" style="font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px">Command center</p>
   <h1>What's the situation?</h1>
@@ -65,7 +66,7 @@ $('chips').innerHTML=examples.map(e=>`<button class="chip" type="button">${esc(e
 $('chips').onclick=e=>{if(e.target.classList.contains('chip'))$('sit').value=e.target.textContent};
 
 let CODE='';try{CODE=localStorage.getItem('cq-admin')||''}catch(_){}
-function showGate(){$('gate').hidden=!!CODE;$('main').hidden=!CODE}
+function showGate(){const so=$('signout');so.hidden=!CODE;so.onclick=()=>{CODE='';try{localStorage.removeItem('cq-admin')}catch(_){}$('out').innerHTML='';showGate()};$('gate').hidden=!!CODE;$('main').hidden=!CODE}
 showGate();
 const go1=()=>{const c=$('code').value.trim();if(!c)return;CODE=c;try{localStorage.setItem('cq-admin',c)}catch(_){}$('out').innerHTML='';showGate()};
 $('entercode').onclick=go1;$('code').onkeydown=e=>{if(e.key==='Enter')go1()};
