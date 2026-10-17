@@ -4,66 +4,73 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Matt Stearn's Page</title>
-<meta name="description" content="Consulting tools by Matt Stearn: the Culture and Quality Toolkit and the Consultant Console.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f3ee;--panel:#fffdf9;--fg:#1c2421;--mute:#69726d;--line:#e2ded3;--accent:#1d5a4a;--accent-fg:#fff;--soft:#e3efe9;--inf:#4a4f86;--infbg:#e8e9f6}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#111614;--panel:#19201d;--fg:#e8ece9;--mute:#98a39d;--line:#2a3430;--accent:#6fc4a4;--accent-fg:#0d1512;--soft:#213129;--inf:#aab0f0;--infbg:#262a4a;color-scheme:dark}
+:root{--bg:#f3eee4;--panel:#fbf8f2;--fg:#1f2a22;--mute:#667064;--line:#ddd3c0;--accent:#2f4a38;--accent-fg:#fbf8f2;--glow:#d98f55;--gravel:#c8b59a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121815;--panel:#1a221d;--fg:#ece8dd;--mute:#a3ab9f;--line:#2e3a32;--accent:#a9c9ad;--accent-fg:#14201a;--glow:#e3a06b;--gravel:#5b5242;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121815;--panel:#1a221d;--fg:#ece8dd;--mute:#a3ab9f;--line:#2e3a32;--accent:#a9c9ad;--accent-fg:#14201a;--glow:#e3a06b;--gravel:#5b5242;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Inter,system-ui,sans-serif;padding-inline:16px;padding-block:48px}
-.wrap{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
-.eyebrow{font:600 12px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:0 0 12px}
-h1{font:600 clamp(32px,6vw,48px)/1.1 Fraunces,Georgia,serif;margin:0;text-wrap:balance}
-.lede{color:var(--mute);max-width:56ch;margin:14px 0 0}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
-.tool{display:flex;flex-direction:column;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;min-width:0}
-.tag{align-self:flex-start;font:600 11px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:6px 10px;background:var(--soft);color:var(--accent)}
-.tool.adv .tag{background:var(--infbg);color:var(--inf)}
-h2{font:600 24px/1.2 Fraunces,Georgia,serif;margin:0}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Jost,system-ui,sans-serif}
+.hero{position:relative;min-height:min(86vh,760px);display:flex;align-items:flex-end;color:#fbf8f2;background:#27392d url(hero.jpg) center 62%/cover no-repeat;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,22,17,.45) 0%,rgba(14,22,17,.05) 38%,rgba(14,22,17,.72) 100%)}
+.hero-in{width:100%;max-width:1040px;margin:0 auto;padding:96px 16px 150px}
+.eyebrow{margin:0 0 14px;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#f0d9bd}
+h1{margin:0;font:600 clamp(40px,7vw,76px)/1.04 "Cormorant Garamond",Georgia,serif;letter-spacing:-.01em;text-wrap:balance}
+.lede{margin:18px 0 0;max-width:560px;font-size:18px;color:#f1ece1}
+.tools{max-width:1040px;margin:-96px auto 0;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;position:relative}
+.tool{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;min-width:0;box-shadow:0 18px 40px -22px rgba(20,30,22,.45)}
+.tag{font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--glow)}
+h2{margin:0;font:600 30px/1.12 "Cormorant Garamond",Georgia,serif;text-wrap:balance}
 .tool p{margin:0;color:var(--mute)}
-.tool ul{margin:0;padding-left:18px;color:var(--mute);display:flex;flex-direction:column;gap:4px;font-size:14.5px}
-.btn{margin-top:auto;align-self:flex-start;display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font:600 14px/1 Inter,sans-serif;padding:13px 20px;border-radius:9px}
+ul{margin:4px 0 8px;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15px}
+li{padding-left:18px;position:relative}
+li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--gravel)}
+.btn{margin-top:auto;align-self:flex-start;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:500;letter-spacing:.04em;padding:12px 22px;border-radius:2px}
 .btn:hover{opacity:.9}
-.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.foot{color:var(--mute);font-size:13px}
+.btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+.band{position:relative;margin-top:84px;height:260px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fbf8f2;background:#5b4a3f url(sunset.jpg) 50% 34%/cover no-repeat;isolation:isolate}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,16,20,.28),rgba(18,16,20,.58))}
+.band p{text-shadow:0 1px 14px rgba(0,0,0,.45);margin:0;padding:0 16px;font:500 22px/1.3 "Cormorant Garamond",Georgia,serif;letter-spacing:.02em;text-wrap:balance}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+<header class="hero">
+  <div class="hero-in">
     <p class="eyebrow">Consulting tools</p>
     <h1>Matt Stearn's Page</h1>
     <p class="lede">Two tools that work from the same library: one shows how culture shows up in quality, the other turns a situation into a grounded first read.</p>
-  </header>
+  </div>
+</header>
 
-  <main class="tools">
-    <section class="tool">
-      <span class="tag">Client access code</span>
-      <h2>Culture and Quality Toolkit</h2>
-      <p>Work one leadership issue through a structured method and see where culture is shaping quality.</p>
-      <ul>
-        <li>Pick the issue that matters most</li>
-        <li>Check people fit and ownership</li>
-        <li>Get next steps and what to measure</li>
-      </ul>
-      <a class="btn" href="/toolkit">Open the toolkit</a>
-    </section>
+<main class="tools">
+  <section class="tool">
+    <span class="tag">Client access code</span>
+    <h2>Culture and Quality Toolkit</h2>
+    <p>Work one leadership issue through a structured method and see where culture is shaping quality.</p>
+    <ul>
+      <li>Pick the issue that matters most</li>
+      <li>Check people fit and ownership</li>
+      <li>Get next steps and what to measure</li>
+    </ul>
+    <a class="btn" href="/toolkit">Open the toolkit</a>
+  </section>
+  <section class="tool">
+    <span class="tag">Consultant access</span>
+    <h2>Consultant Console</h2>
+    <p>Describe a situation in plain words and get a read, likely causes and first moves, grounded in the library.</p>
+    <ul>
+      <li>Quick diagnosis from a short description</li>
+      <li>Likely causes and first moves</li>
+      <li>Questions to ask in the room</li>
+    </ul>
+    <a class="btn" href="/console/">Open the console</a>
+  </section>
+</main>
 
-    <section class="tool adv">
-      <span class="tag">Consultant access</span>
-      <h2>Consultant Console</h2>
-      <p>Describe a situation in plain words and get a read, likely causes and first moves, grounded in the library.</p>
-      <ul>
-        <li>Quick diagnosis from a short description</li>
-        <li>Likely causes and first moves</li>
-        <li>Questions to ask in the room</li>
-      </ul>
-      <a class="btn" href="/console/">Open the console</a>
-    </section>
-  </main>
-
-  <p class="foot">Both tools ask for an access code before running.</p>
-</div>
+<footer class="band">
+  <p>Both tools ask for an access code before running.</p>
+</footer>
 </body>
 </html>
