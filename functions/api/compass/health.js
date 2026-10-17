@@ -6,7 +6,16 @@ import { airtable, configured, TABLES } from "../../_lib/airtable.js";
 const json = (b, status = 200) =>
   new Response(JSON.stringify(b), { status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost(ctx) {
+  try {
+    return await run(ctx);
+  } catch (e) {
+    // Last-resort guard: always answer in JSON, never include secrets.
+    return json({ ok: false, steps: [{ name: "Server error", ok: false, detail: String((e && e.name) || "Error") + ": " + String((e && e.message) || "unknown").slice(0, 160) }] });
+  }
+}
+
+async function run({ request, env }) {
   const code = (request.headers.get("x-access-code") || "").trim();
   const codes = (env.ADMIN_CODES || "").split(",").map((s) => s.trim()).filter(Boolean);
   if (!codes.length) return json({ error: "Service is not configured." }, 503);
