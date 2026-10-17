@@ -17,7 +17,7 @@ li small{display:block;color:var(--mute)}
 </style></head><body><main>
 <h1>Connection check</h1><p>Confirms the server can reach the Strategy Compass base. Admin code required.</p>
 <div class="card"><label for="code" style="display:block;margin-bottom:6px">Admin code</label>
-<input id="code" type="password" autocomplete="off"><button id="go">Run check</button><ul id="out"></ul></div>
+<input id="code" type="text" autocomplete="off" spellcheck="false" data-lpignore="true" data-1p-ignore><button id="go">Run check</button><ul id="out"></ul></div>
 </main><script>
 var out=document.getElementById("out");
 function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
@@ -26,10 +26,11 @@ document.getElementById("go").onclick=async function(){
   out.innerHTML="<li>Checking...</li>";
   try{
     var r=await fetch("/api/compass/health",{method:"POST",headers:{"x-access-code":code}});
-    var j=await r.json();
+    var txt=await r.text(), j;
+    try{j=JSON.parse(txt)}catch(x){out.innerHTML='<li class="no"><b>&times;</b><span>Unexpected reply (HTTP '+r.status+')<small>'+esc(txt.slice(0,200)||"empty body")+"</small></span></li>";return}
     if(j.error){out.innerHTML='<li class="no"><b>&times;</b><span>'+esc(j.error)+"</span></li>";return}
     out.innerHTML=j.steps.map(function(s){return '<li class="'+(s.ok?"ok":"no")+'"><b>'+(s.ok?"&#10003;":"&times;")+"</b><span>"+esc(s.name)+"<small>"+esc(s.detail)+"</small></span></li>"}).join("")+
       '<li class="'+(j.ok?"ok":"no")+'"><b>'+(j.ok?"&#10003;":"&times;")+"</b><span><strong>"+(j.ok?"All checks passed":"Something needs attention")+"</strong></span></li>";
-  }catch(e){out.innerHTML='<li class="no"><b>&times;</b><span>Could not reach the server.</span></li>'}
+  }catch(e){out.innerHTML='<li class="no"><b>&times;</b><span>Request failed<small>'+esc(e&&e.message||e)+"</small></span></li>"}
 };
 </script></body></html>
