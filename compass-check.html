@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compass Connection Check</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee4;--panel:#fbf8f2;--fg:#1f2a22;--mute:#667064;--line:#ddd3c0;--accent:#2f4a38;--accent-fg:#fbf8f2;--good:#2f6b46;--bad:#a8402a}
+@media (prefers-color-scheme:dark){:root{--bg:#121815;--panel:#1a221d;--fg:#ece8dd;--mute:#a3ab9f;--line:#2e3a32;--accent:#a9c9ad;--accent-fg:#14201a;--good:#8cc9a0;--bad:#e59a82}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Jost,system-ui,sans-serif;padding:32px 16px}
+main{max-width:560px;margin:0 auto}h1{font:600 36px/1.1 "Cormorant Garamond",Georgia,serif;margin:0 0 6px}
+p{color:var(--mute);margin:0 0 20px}.card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:20px}
+input{width:100%;padding:11px;border:1px solid var(--line);border-radius:2px;background:var(--bg);color:var(--fg);font:inherit;margin-bottom:12px}
+button{background:var(--accent);color:var(--accent-fg);border:0;padding:11px 20px;border-radius:2px;font:500 16px Jost,system-ui,sans-serif;cursor:pointer}
+ul{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+li{display:flex;gap:10px;align-items:flex-start}li b{min-width:22px}.ok b{color:var(--good)}.no b{color:var(--bad)}
+li small{display:block;color:var(--mute)}
+</style></head><body><main>
+<h1>Connection check</h1><p>Confirms the server can reach the Strategy Compass base. Admin code required.</p>
+<div class="card"><label for="code" style="display:block;margin-bottom:6px">Admin code</label>
+<input id="code" type="password" autocomplete="off"><button id="go">Run check</button><ul id="out"></ul></div>
+</main><script>
+var out=document.getElementById("out");
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+document.getElementById("go").onclick=async function(){
+  var code=document.getElementById("code").value.trim();
+  out.innerHTML="<li>Checking...</li>";
+  try{
+    var r=await fetch("/api/compass/health",{method:"POST",headers:{"x-access-code":code}});
+    var j=await r.json();
+    if(j.error){out.innerHTML='<li class="no"><b>&times;</b><span>'+esc(j.error)+"</span></li>";return}
+    out.innerHTML=j.steps.map(function(s){return '<li class="'+(s.ok?"ok":"no")+'"><b>'+(s.ok?"&#10003;":"&times;")+"</b><span>"+esc(s.name)+"<small>"+esc(s.detail)+"</small></span></li>"}).join("")+
+      '<li class="'+(j.ok?"ok":"no")+'"><b>'+(j.ok?"&#10003;":"&times;")+"</b><span><strong>"+(j.ok?"All checks passed":"Something needs attention")+"</strong></span></li>";
+  }catch(e){out.innerHTML='<li class="no"><b>&times;</b><span>Could not reach the server.</span></li>'}
+};
+</script></body></html>
